@@ -6,6 +6,7 @@ This is the server for the Haozuyi app, built using Go and uses a PostgreSQL dat
 ![Structure](./docs/_images/structure.png)
 
 ## DB ER-diagram
+#### 可在這查看修改：https://dbdiagram.io/d/Haozuyi_db_desing-650546e602bd1c4a5eae621f
 ![Structure](./docs/_images/er-diagram.png)
 
 ## Installation
