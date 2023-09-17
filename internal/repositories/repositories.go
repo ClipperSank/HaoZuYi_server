@@ -8,6 +8,7 @@ import (
 type Repositories struct {
 	Users      		models.UserRepository
 	SearchRecords  models.SearchRecordRepository
+	// Houses			model.HouseRepository
 	Posts      		models.PostRepository
 	Messages   		models.MessageRepository
 	Locations 		models.LocationRepository
