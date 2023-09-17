@@ -1,9 +1,12 @@
-# Find Your Next Owner (Server)
+# Haozuyi House Renter (Server)
 
-This is the server for the Find Your Next Owner app. It is built using Go and uses a PostgreSQL database.
+This is the server for the Haozuyi app, built using Go and uses a PostgreSQL database.
 
 ## Structure
 ![Structure](./docs/_images/structure.png)
+
+## DB ER-diagram
+![Structure](./docs/_images/er-diagram.png)
 
 ## Installation
 
