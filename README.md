@@ -9,7 +9,7 @@ This is the server for the Find Your Next Owner app. It is built using Go and us
 
 1. Clone the repo
 ```bash
-git clone https://github.com/vincent0426/fyno-server.git
+git clone https://github.com/ClipperSank/HaoZuYi_server.git
 ```
 
 2. Go into the directory
