@@ -1,5 +1,5 @@
 CREATE TABLE "users" (
-  "id" bigserial PRIMARY KEY,
+  "id" uuid UNIQUE PRIMARY KEY,
   "indexpage" varchar,
   "username" varchar NOT NULL,
   "role" varchar NOT NULL,
@@ -14,17 +14,17 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "user_search_records" (
-  "id" bigserial PRIMARY KEY,
+  "id" uuid UNIQUE PRIMARY KEY,
   "search_query" varchar NOT NULL,
-  "user_id" bigint NOT NULL,
+  "user_id" uuid NOT NULL,
   "search_time" timestamp NOT NULL DEFAULT 'now()'
 );
 
-CREATE TABLE "contacts" (
-  "id" bigserial PRIMARY KEY,
-  "renter_id" bigint NOT NULL,
-  "landlord_id" bigint NOT NULL,
-  "house_id" integer NOT NULL,
+CREATE TABLE "contracts" (
+  "id" uuid UNIQUE PRIMARY KEY,
+  "renter_id" uuid NOT NULL,
+  "landlord_id" uuid NOT NULL,
+  "house_id" uuid NOT NULL,
   "contract" text NOT NULL,
   "rent" decimal NOT NULL,
   "start_time" timestamp NOT NULL,
@@ -34,8 +34,8 @@ CREATE TABLE "contacts" (
 );
 
 CREATE TABLE "houses" (
-  "id" bigserial PRIMARY KEY,
-  "user_id" bigint NOT NULL,
+  "id" uuid UNIQUE PRIMARY KEY,
+  "user_id" uuid NOT NULL,
   "address" varchar NOT NULL,
   "is_renting" integer,
   "price" decimal,
@@ -47,17 +47,17 @@ CREATE TABLE "houses" (
 );
 
 CREATE TABLE "reviews" (
-  "id" bigserial PRIMARY KEY,
-  "user_id" bigint NOT NULL,
-  "house_id" bigint NOT NULL,
+  "id" uuid UNIQUE PRIMARY KEY,
+  "user_id" uuid NOT NULL,
+  "house_id" uuid NOT NULL,
   "rating" decimal NOT NULL,
   "comment" text NOT NULL,
   "created_at" timestamp DEFAULT 'now()'
 );
 
 CREATE TABLE "house_photos" (
-  "id" bigserial PRIMARY KEY,
-  "house_id" bigint NOT NULL,
+  "id" uuid UNIQUE PRIMARY KEY,
+  "house_id" uuid NOT NULL,
   "photo_url" varchar NOT NULL
 );
 
@@ -67,11 +67,11 @@ CREATE INDEX ON "users" ("account");
 
 CREATE INDEX ON "user_search_records" ("user_id");
 
-CREATE INDEX ON "contacts" ("renter_id");
+CREATE INDEX ON "contracts" ("renter_id");
 
-CREATE INDEX ON "contacts" ("landlord_id");
+CREATE INDEX ON "contracts" ("landlord_id");
 
-CREATE INDEX ON "contacts" ("renter_id", "landlord_id");
+CREATE INDEX ON "contracts" ("renter_id", "landlord_id");
 
 COMMENT ON COLUMN "users"."indexpage" IS '主頁索引';
 
@@ -101,23 +101,23 @@ COMMENT ON COLUMN "user_search_records"."user_id" IS '用戶ID';
 
 COMMENT ON COLUMN "user_search_records"."search_time" IS '搜索時間';
 
-COMMENT ON COLUMN "contacts"."renter_id" IS '租客用戶ID';
+COMMENT ON COLUMN "contracts"."renter_id" IS '租客用戶ID';
 
-COMMENT ON COLUMN "contacts"."landlord_id" IS '房東用戶ID';
+COMMENT ON COLUMN "contracts"."landlord_id" IS '房東用戶ID';
 
-COMMENT ON COLUMN "contacts"."house_id" IS '房屋ID';
+COMMENT ON COLUMN "contracts"."house_id" IS '房屋ID';
 
-COMMENT ON COLUMN "contacts"."contract" IS '合同詳情';
+COMMENT ON COLUMN "contracts"."contract" IS '合同詳情';
 
-COMMENT ON COLUMN "contacts"."rent" IS '租金金額';
+COMMENT ON COLUMN "contracts"."rent" IS '租金金額';
 
-COMMENT ON COLUMN "contacts"."start_time" IS '開始時間';
+COMMENT ON COLUMN "contracts"."start_time" IS '開始時間';
 
-COMMENT ON COLUMN "contacts"."end_time" IS '結束時間';
+COMMENT ON COLUMN "contracts"."end_time" IS '結束時間';
 
-COMMENT ON COLUMN "contacts"."renter_review" IS '租客評價';
+COMMENT ON COLUMN "contracts"."renter_review" IS '租客評價';
 
-COMMENT ON COLUMN "contacts"."landlord_review" IS '房東評價';
+COMMENT ON COLUMN "contracts"."landlord_review" IS '房東評價';
 
 COMMENT ON COLUMN "houses"."user_id" IS '用戶ID';
 
@@ -153,9 +153,9 @@ COMMENT ON COLUMN "house_photos"."photo_url" IS '照片URL';
 
 ALTER TABLE "reviews" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-ALTER TABLE "contacts" ADD FOREIGN KEY ("renter_id") REFERENCES "users" ("id");
+ALTER TABLE "contracts" ADD FOREIGN KEY ("renter_id") REFERENCES "users" ("id");
 
-ALTER TABLE "contacts" ADD FOREIGN KEY ("landlord_id") REFERENCES "users" ("id");
+ALTER TABLE "contracts" ADD FOREIGN KEY ("landlord_id") REFERENCES "users" ("id");
 
 ALTER TABLE "houses" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 

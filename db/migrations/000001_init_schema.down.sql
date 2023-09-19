@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS user_search_record;
-DROP TABLE IF EXISTS contact;
-DROP TABLE IF EXISTS house_photo;
-DROP TABLE IF EXISTS house;
-DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS user_search_records;
+DROP TABLE IF EXISTS contacts;
+DROP TABLE IF EXISTS house_photos;
+DROP TABLE IF EXISTS houses;
+DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS users;

@@ -27,16 +27,16 @@ type HouseHandlers interface {
 }
 
 type HouseService interface {
-	GetAllHouses() ([]*House, error)
-	GetHouse(uuid.UUID) (*House, error)
+	GetAllHouses(userID uuid.UUID) ([]*House, error)
+	GetHouse(ID uuid.UUID) (*House, error)
 	CreateHouse(sr *House) (uuid.UUID, error)
 	// TODO: UpdateHouse(sr *House) (uuid.UUID, error)
 	DeleteAllHouses() error
 }
 
 type HouseRepository interface {
-	GetAll() ([]*House, error)
-	Get(uuid.UUID) (*House, error)
+	GetAll(userID uuid.UUID) ([]*House, error)
+	Get(ID uuid.UUID) (*House, error)
 	Create(p *House) (uuid.UUID, error)
 	// TODO: Update(p *House) (uuid.UUID, error)
 	DeleteAll() error

@@ -1,13 +1,9 @@
 package repositories
 
 import (
-	"bytes"
 	"database/sql"
-	"errors"
 	"fmt"
 	"fyno/server/internal/models"
-	"strconv"
-	"strings"
 
 	"github.com/google/uuid"
 	"github.com/lib/pq"
@@ -23,15 +19,14 @@ func NewHouseRepository(db *sql.DB) models.HouseRepository {
 	}
 }
 
-func (hr *houseRepository) GetAll() ([]*models.House, error) {
-	query := `SELECT h.id, h.user_id, h.kind, h.name, h.age, h.gender, h.content, l.id AS location_id, l.name AS location_name, c.id AS category_id, c.name AS category_name, h.created_at
+func (hr *houseRepository) GetAll(userID uuid.UUID) ([]*models.House, error) {
+	query := `SELECT h.id, h.user_id, h.address, h.is_renting, h.price, h.size, h.kitchen, h.bathroom, h.sleeping_room, h.created_at
 				FROM houses AS h
-				JOIN locations AS l ON h.location_id = l.id 
-				JOIN categories As c ON h.category_id = c.id 
+				WHERE h.user_id = $1
 				ORDER BY h.created_at DESC`
 
 	fmt.Println("query", query)
-	rows, err := hr.DB.Query(query)
+	rows, err := hr.DB.Query(query, userID)
 	if err != nil {
 		fmt.Println("error", err)
 		return nil, err
@@ -41,7 +36,7 @@ func (hr *houseRepository) GetAll() ([]*models.House, error) {
 	var houses []*models.House
 	for rows.Next() {
 		var h models.House
-		err := rows.Scan(&h.ID, &h.UserID, &h.Kind, &h.Name, &h.Age, &h.Gender, &h.Content, &h.Location.ID, &h.Location.Name, &h.Category.ID, &h.Category.Name, &h.CreatedAt)
+		err := rows.Scan(&h.ID, &h.UserID, &h.Address, &h.IsRenting, &h.Price, &h.Size, &h.Kitchen, &h.Bathroom, &h.SleepingRoom, &h.CreatedAt)
 		if err != nil {
 			fmt.Println("error", err)
 			return nil, err
