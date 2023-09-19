@@ -6,6 +6,11 @@ import (
 	"github.com/google/uuid"
 )
 
+type HouseImage struct {
+	Url  string `json:"url"`
+	Rank int    `json:"rank"`
+}
+
 type House struct {
     ID            uuid.UUID `json:"id"`
     UserID        uuid.UUID `json:"user_id"`
@@ -32,6 +37,7 @@ type HouseService interface {
 	CreateHouse(sr *House) (uuid.UUID, error)
 	// TODO: UpdateHouse(sr *House) (uuid.UUID, error)
 	DeleteAllHouses() error
+    CreateHouseImage(p []HouseImage, houseID uuid.UUID) error
 }
 
 type HouseRepository interface {
@@ -40,4 +46,5 @@ type HouseRepository interface {
 	Create(p *House) (uuid.UUID, error)
 	// TODO: Update(p *House) (uuid.UUID, error)
 	DeleteAll() error
+    CreateHouseImage(id uuid.UUID, h HouseImage, houseID uuid.UUID) error
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// TODO: Create routes for each Table
 func (app *Application) NewRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
@@ -26,15 +27,15 @@ func (app *Application) NewRouter() *gin.Engine {
 		user.POST("", app.Handlers.Users.CreateUser)
 	}
 
-	post := r.Group("/api/posts")
-	{
-		post.GET("", app.Handlers.Posts.GetAllPosts)
-		post.GET("/:id", app.Handlers.Posts.GetPost)
-		post.POST("", app.authenticate, app.Handlers.Posts.CreatePost)
-	}
+	// post := r.Group("/api/posts")
+	// {
+	// 	post.GET("", app.Handlers.Posts.GetAllPosts)
+	// 	post.GET("/:id", app.Handlers.Posts.GetPost)
+	// 	post.POST("", app.authenticate, app.Handlers.Posts.CreatePost)
+	// }
 
-	r.GET("/api/locations", app.Handlers.Locations.GetAllLocations)
-	r.GET("/api/categories", app.Handlers.Categories.GetAllCategories)
+	// r.GET("/api/locations", app.Handlers.Locations.GetAllLocations)
+	// r.GET("/api/categories", app.Handlers.Categories.GetAllCategories)
 
 	r.GET("/ws/:user_id", app.Handlers.WebSockets.WsConnection)
 

@@ -97,3 +97,14 @@ func (hr *houseRepository) DeleteAll() error {
 
 	return nil
 }
+
+func (hr *houseRepository) CreateHouseImage(id uuid.UUID, h models.HouseImage, houseID uuid.UUID) error {
+	fmt.Println("houseID", houseID)
+	query := `INSERT INTO house_images (id, url, rank, post_id) VALUES ($1, $2, $3, $4)`
+	_, err := hr.DB.Exec(query, id, h.Url, h.Rank, houseID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

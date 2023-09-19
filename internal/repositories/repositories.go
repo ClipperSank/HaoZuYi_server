@@ -8,20 +8,17 @@ import (
 type Repositories struct {
 	Users      		models.UserRepository
 	SearchRecords  models.SearchRecordRepository
-	// Houses			model.HouseRepository
-	Posts      		models.PostRepository
-	Messages   		models.MessageRepository
-	Locations 		models.LocationRepository
-	Categories 		models.CategoryRepository
+	// Houses			models.HouseRepository
+	// Contracts      models.ContractRepository
+	// Reviews			models.ReviewRepository
 }
 
 func NewRepositories(db *sql.DB) *Repositories {
 	return &Repositories{
 		Users:      	NewUserRepository(db),
 		SearchRecords: NewSearchRecordRepository(db),
-		Posts:      	NewPostRepository(db),
-		Messages:   	NewMessageRepository(db),
-		Locations:  	NewLocationRepository(db),
-		Categories: 	NewCategoryRepository(db),
+		// Houses:		   NewHouseRepository(db),
+		// Contracts:	   NewContractsRepository(db),
+		// Reviews: 		NewReviewRepository(db),
 	}
 }
