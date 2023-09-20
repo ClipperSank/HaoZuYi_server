@@ -16,22 +16,22 @@ func NewHouseService(hr models.HouseRepository) models.HouseService {
 	}
 }
 
-func (ps *houseService) GetAllHouses() ([]*models.House, error) {
-	return ps.houseRepository.GetAll()
+func (hs *houseService) GetAllHouses(user_id uuid.UUID) ([]*models.House, error) {
+	return hs.houseRepository.GetAll(user_id)
 }
 
-func (ps *houseService) GetHouse(id uuid.UUID) (*models.House, error) {
-	return ps.houseRepository.Get(id)
+func (hs *houseService) GetHouse(house_id uuid.UUID) (*models.House, error) {
+	return hs.houseRepository.Get(house_id)
 }
 
-func (ps *houseService) CreateHouse(p *models.House) (uuid.UUID, error) {
-	return ps.houseRepository.Create(p)
+func (hs *houseService) CreateHouse(h *models.House) (uuid.UUID, error) {
+	return hs.houseRepository.Create(h)
 }
 
-func (ps *houseService) CreateHouseImage(p []models.HouseImage, houseID uuid.UUID) error {
-	for _, v := range p {
+func (hs *houseService) CreateHouseImage(h []models.HouseImage, houseID uuid.UUID) error {
+	for _, v := range h {
 		id := uuid.New()
-		err := ps.houseRepository.CreateHouseImage(id, v, houseID)
+		err := hs.houseRepository.CreateHouseImage(id, v, houseID)
 		if err != nil {
 			return err
 		}
@@ -40,6 +40,6 @@ func (ps *houseService) CreateHouseImage(p []models.HouseImage, houseID uuid.UUI
 	return nil
 }
 
-func (ps *houseService) DeleteAllHouses() error {
-	return ps.houseRepository.DeleteAll()
+func (hs *houseService) DeleteAllHouses() error {
+	return hs.houseRepository.DeleteAll()
 }

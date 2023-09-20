@@ -20,7 +20,10 @@ func NewHouseHandlers(hs models.HouseService) models.HouseHandlers {
 }
 
 func (hh *houseHandlers) GetAllHouses(c *gin.Context) {
-	houses, err := hh.houseService.GetAllHouses()
+	fmt.Println("GetAllHouses")
+	userID := utils.StringToUUID(c.MustGet("userID").(string))
+	fmt.Println("houseID", userID)
+	houses, err := hh.houseService.GetAllHouses(userID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -58,7 +61,7 @@ func (hh *houseHandlers) CreateHouse(c *gin.Context) {
 		return
 	}
 
-	err = hh.houseService.CreateHouseImage(input.HouseImage, input.ID)
+	err = hh.houseService.CreateHouseImage(input.HouseImages, input.ID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

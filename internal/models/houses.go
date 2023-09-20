@@ -12,16 +12,17 @@ type HouseImage struct {
 }
 
 type House struct {
-    ID            uuid.UUID `json:"id"`
-    UserID        uuid.UUID `json:"user_id"`
-    Address       string    `json:"address"`
-    IsRenting     int       `json:"is_renting"`
-    Price         float64   `json:"price"`
-    Size          int       `json:"size"`
-    Kitchen       int       `json:"kitchen"`
-    Bathroom      int       `json:"bathroom"`
-    SleepingRoom  int       `json:"sleeping_room"`
-    CreatedAt     time.Time `json:"created_at"`
+    ID            uuid.UUID     `json:"id"`
+    UserID        uuid.UUID     `json:"user_id"`
+    Address       string        `json:"address"`
+    IsRenting     int           `json:"is_renting"`
+    Price         float64       `json:"price"`
+    Size          int           `json:"size"`
+    Kitchen       int           `json:"kitchen"`
+    Bathroom      int           `json:"bathroom"`
+    SleepingRoom  int           `json:"sleeping_room"`
+	HouseImages   []HouseImage  `json:"house_images"`
+    CreatedAt     time.Time     `json:"created_at"`
 }
 
 type HouseHandlers interface {
@@ -36,8 +37,8 @@ type HouseService interface {
 	GetHouse(ID uuid.UUID) (*House, error)
 	CreateHouse(sr *House) (uuid.UUID, error)
 	// TODO: UpdateHouse(sr *House) (uuid.UUID, error)
+    CreateHouseImage(hi []HouseImage, houseID uuid.UUID) error
 	DeleteAllHouses() error
-    CreateHouseImage(p []HouseImage, houseID uuid.UUID) error
 }
 
 type HouseRepository interface {
