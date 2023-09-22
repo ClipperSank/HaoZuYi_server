@@ -8,16 +8,16 @@ import (
 )
 
 type Contract struct {
-	ID            uuid.UUID `json:"id"`
-	RenterID      uuid.UUID `json:"renter_id"`
-	LandlordID    uuid.UUID `json:"landlord_id"`
-	HouseID       uuid.UUID `json:"house_id"`
-	ContractText  string    `json:"contract"`
-	Rent          float64   `json:"rent"`
-	StartTime     time.Time `json:"start_time"`
-	EndTime       *time.Time `json:"end_time,omitempty"`
-	RenterReview  *string   `json:"renter_review,omitempty"`
-	LandlordReview *string   `json:"landlord_review,omitempty"`
+	ID                 uuid.UUID      `json:"id"`
+	RenterID           uuid.UUID      `json:"renter_id"`
+	LandlordID         uuid.UUID      `json:"landlord_id"`
+	HouseID            uuid.UUID      `json:"house_id"`
+	ContractText       string         `json:"contract"`
+	Rent               float64        `json:"rent"`
+	StartTime          time.Time      `json:"start_time"`
+	EndTime            *time.Time      `json:"end_time,omitempty"`
+	RenterReview       *string        `json:"renter_review,omitempty"`
+	LandlordReview *     string        `json:"landlord_review,omitempty"`
 }
 
 type ContractHandlers interface {

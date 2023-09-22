@@ -23,9 +23,9 @@ type Handlers struct {
 func NewHandlers(serv *services.Services) *Handlers {
 	return &Handlers{
 		Users:      		NewUserHandlers(serv.Users),
-		SearchRecords: 	NewSearchRecordHandlers(serv.SearchRecords),
+		SearchRecords: 		NewSearchRecordHandlers(serv.SearchRecords),
 		Houses:				NewHouseHandlers(serv.Houses),
-		// Contracts:			NewContractHandlers(serv.Contracts),
+		Contracts:			NewContractHandlers(serv.Contracts),
 		// Reviews: 			  	NewReviewHandlers(serv.Reviews),
 		
 		S3:         		NewS3Handlers(serv.S3),

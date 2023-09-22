@@ -18,9 +18,9 @@ type Services struct {
 func NewServices(repositories *repositories.Repositories) *Services {
 	return &Services{
 		Users:     			NewUserService(repositories.Users),
-		SearchRecords: 	NewSearchRecordService(repositories.SearchRecords),
-		// Houses:				NewHouseService(repositories.HouseServices),
-		// Contracts:			NewContractService(repositories.Contracts),
+		SearchRecords: 		NewSearchRecordService(repositories.SearchRecords),
+		Houses:				NewHouseService(repositories.Houses),
+		Contracts:			NewContractService(repositories.Contracts),
 		// Reviews: 		      NewReviewService(repositories.ReviewServic),
 
 		S3:					NewS3Service(),
